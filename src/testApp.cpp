@@ -1,9 +1,5 @@
 #include "testApp.h"
 
-void notice(string n)
-{
-	ofLog(OF_LOG_NOTICE, n);
-}
 
 //--------------------------------------------------------------
 void instantChoreography::setup(){
@@ -26,7 +22,7 @@ void instantChoreography::setup(){
 	
 	string fileName = "test.mov";
 	
-	saver.setCodecQualityLevel(OF_QT_SAVER_CODEC_QUALITY_NORMAL);  
+	saver.setCodecQualityLevel(OF_QT_SAVER_CODEC_QUALITY_HIGH);  
     saver.setup(camWidth,camHeight,fileName);  
 
 	for (int i=0; i < 10; i++) {
@@ -64,7 +60,7 @@ void instantChoreography::updateDir()
 		fileNames[numFiles - i] = "ic/" + directory.getName(i - 1);
 		//cout << numFiles - i << fileNames[numFiles - i] << "\n";
 	}
-
+	
 	dirUpdated = true;
 }
 	
@@ -73,7 +69,6 @@ void instantChoreography::updateDir()
 void instantChoreography::update(){
 
 	loop = ofGetFrameNum() % (loopMoviesAt + idleTime + fadeInTime + fadeOutTime);
-	cout << loop;
 	
 	grabber.grabFrame();
 	
@@ -196,7 +191,7 @@ void instantChoreography::stopRecording()
 
 void instantChoreography::fade(int screen)
 {
-	cout << "FadeMode: " << fadeMode[screen] << "\n";
+	//cout << "FadeMode: " << fadeMode[screen] << "\n";
 	if (fadeMode[screen] == 0) {
 		return;
 	} else if (fadeMode[screen] == 1) {

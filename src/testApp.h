@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofFileUtils.h"
+#include "ofxOsc.h"
 
 #include "ofxQTKitVideoPlayer.h"
 
@@ -41,6 +42,18 @@ public:
 	int idleTime; // Time to wait in black
 	
 	ofxQTKitVideoPlayer movie[10];
+	
+	int vPos[10][4]; //[ID][x, y, w, h]
+	
+	int loopMoviesAt;
+	int loop;
+
+	int currentIdleMovie;
+	bool dirUpdated;
+	
+	
+	//Recorder stuff
+	
 	ofVideoGrabber		grabber;
 	ofQtVideoSaver		saver;
 		
@@ -51,17 +64,13 @@ public:
 	bool recording;
 	int recordingCounter;
 	
-	int vPos[10][4]; //[ID][x, y, w, h]
 	
-	int loopMoviesAt;
-	int loop;
 	
 	ofDirectory directory;
 	string fileNames[9];
-	bool dirUpdated;
+	//bool dirUpdated;
 	
-	int currentIdleMovie;
-
+	
 };
 
 

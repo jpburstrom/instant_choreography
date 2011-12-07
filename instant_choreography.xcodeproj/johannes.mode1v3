@@ -321,7 +321,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>testApp.cpp</string>
+								<string>testApp.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -329,11 +329,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>testApp.cpp</string>
+										<string>testApp.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>8F3D2473148F5458009BF151</string>
+										<string>8F3D24A5148F5BC9009BF151</string>
 										<key>history</key>
 										<array>
 											<string>8FA4472D148E65860051C4EC</string>
@@ -349,11 +349,13 @@
 											<string>8F3D23CD148F40FC009BF151</string>
 											<string>8F3D23D5148F42C9009BF151</string>
 											<string>8F3D23D6148F42C9009BF151</string>
-											<string>8F3D23D7148F42C9009BF151</string>
 											<string>8F3D23D8148F42C9009BF151</string>
-											<string>8F3D23D9148F42C9009BF151</string>
-											<string>8F3D2469148F5407009BF151</string>
-											<string>8F3D246A148F5407009BF151</string>
+											<string>8F3D249D148F5BC9009BF151</string>
+											<string>8F3D249E148F5BC9009BF151</string>
+											<string>8F3D24A0148F5BC9009BF151</string>
+											<string>8F3D24A2148F5BC9009BF151</string>
+											<string>8F3D24A3148F5BC9009BF151</string>
+											<string>8F3D24A4148F5BC9009BF151</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -551,7 +553,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>8F3D2474148F5458009BF151</string>
 		<string>8F3D1FAE148E6E0C009BF151</string>
 		<string>8F3D1FAF148E6E0C009BF151</string>
 		<string>1CD10A99069EF8BA00B06720</string>
