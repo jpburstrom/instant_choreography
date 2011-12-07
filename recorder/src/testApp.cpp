@@ -4,38 +4,31 @@
 //--------------------------------------------------------------
 void instantChoreography::setup(){
 	
-	loopMoviesAt = 66;//3513;
+	loopMoviesAt = 3513;
 	fadeInTime = 10;
 	fadeOutTime = 30;
 	idleTime = 10;
 	
+	bFullscreen = false;
 	countdown = false;
 	recording = false;
 	thankyou = false;
 	idle = true;
 	recordingCounter = 0;
 	
-	saver.setCodecQualityLevel(OF_QT_SAVER_CODEC_QUALITY_HIGH);  
+	saver.setCodecQualityLevel(OF_QT_SAVER_CODEC_QUALITY_LOW);  
 	
 	fadePos = 255;
 	fadeMode = 0; // start with a fade in, yes?
 	
 	fileNumber = 1;
-	camWidth = 640;
-	camHeight = 480;
+	camWidth = 320;
+	camHeight = 240;
 	
 	grabber.setDeviceID(0);
 	grabber.initGrabber(camWidth,camHeight);
 	
-
-
-	sender.setup(HOST, PORT);
-	ofxOscMessage m;
-	m.setAddress( "/starting" );
-	m.addStringArg( "hello");
-	sender.sendMessage( m );
-	
-	
+		
 	ofSetFrameRate(25);
 	
 	vPos[0] = 20;
@@ -77,6 +70,11 @@ void instantChoreography::updateDir()
 //--------------------------------------------------------------
 void instantChoreography::update(){
 	
+	if (!idle) { 
+		grabber.grabFrame();
+
+	}
+	
 	
 	if (countdown && countdownCounter == 0 && recordingCounter != 0) {
 		startRecording();
@@ -88,7 +86,7 @@ void instantChoreography::update(){
 		//cout << countdownCounter;
 
 	} 
-	if (recording){
+	if (recording && saver.bAmSetupForRecording()){
 		idle = false;
 		if (recordingCounter == 0) {
 			movie.setPosition(0.0);
@@ -99,6 +97,7 @@ void instantChoreography::update(){
 			//fadeMode = 2;
 		}
 		doRecording();
+		movie.setFrame(recordingCounter + 3);
 		movie.update();
 	} 
 	if (thankyou) {
@@ -107,6 +106,7 @@ void instantChoreography::update(){
 		if (200 == recordingCounter) {
 			thankyou = false;
 			idle = true;
+			ofSetFrameRate(10);
 		}
 		if (recordingCounter == 0) {
 			//cout << "fade 1";
@@ -187,6 +187,7 @@ void instantChoreography::startCountdown()
 	//cout << "-------COUNTDOWN--------\n";
 	countdown = true;
 	recordingCounter = 0;
+	
 }
 
 void instantChoreography::startRecording()
@@ -195,7 +196,7 @@ void instantChoreography::startRecording()
 	saver.setup(camWidth,camHeight, fileName);
 	//cout << playFileName << "<< Playfilename\n";
 	movie.loadMovie(playFileName, OFXQTVIDEOPLAYER_MODE_TEXTURE_ONLY);
-	movie.play();
+	//movie.play();
 	
 	recording = true;
 	recordingCounter = 0;
@@ -206,12 +207,11 @@ void instantChoreography::startRecording()
 void instantChoreography::doRecording()
 {
 	//cout << "Do Recording. \n";
-	
-	grabber.grabFrame();
+
 	
 	recordingCounter++;
 	//cout << recordingCounter;
-	if (recordingCounter == loopMoviesAt) {
+	if (recordingCounter > loopMoviesAt) {
 		stopRecording();
 	} else {
 		saver.addFrame(grabber.getPixels(), 1.0f / 25.0f);   
@@ -233,6 +233,7 @@ void instantChoreography::stopRecording(bool del)
 	//FIXME: set this in startRecording, maybe?
 	updateDir();
 	
+	sender.setup(HOST, PORT);
 	ofxOscMessage m;
 	m.setAddress( "/filename" );
 	m.addStringArg( filePath + playFileName );
@@ -278,7 +279,20 @@ void instantChoreography::keyPressed  (int key){
 	//TODO: Check for other keys
 	//cout << "KEY" << key << "\n";
 	
+	if (268 == key) { //F12
+		ofToggleFullscreen();
+		bFullscreen = !bFullscreen;
+		if (bFullscreen) {
+			ofHideCursor ();
+		} else {
+			ofShowCursor ();
+		}
+		return;
+	}
+	
+	
 	if (idle) {
+		ofSetFrameRate(25);
 		thankyou = false;
 		startCountdown();
 
@@ -332,5 +346,11 @@ void instantChoreography::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void instantChoreography::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+//--------------------------------------------------------------
+void instantChoreography::exit(){
+	if(recording)
+		stopRecording(true);
 }
 

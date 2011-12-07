@@ -6,8 +6,7 @@
 
 #include "ofxQTKitVideoPlayer.h"
 
-#include "ofQtVideoSaver.h"
-
+#define PORT 5556
 
 class instantChoreography: public ofBaseApp{
 	
@@ -18,10 +17,7 @@ public:
 	void draw();
 	void debugDraw();
 	
-	void updateDir();
-	void startRecording();
-	void doRecording();
-	void stopRecording();
+	void updateDirOnLoad();
 	
 	void keyPressed(int key);
 	void keyReleased(int key);
@@ -32,16 +28,22 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
+
+	void fade();
 	
-	void fade(int screen);
+	bool bFullscreen;
 	
-	int fadeMode[2]; //No fade, fade in, fade out, black
-	int fadePos[2];
+	int fadeMode; //No fade, fade in, fade out, black
+	int fadePos;
 	int fadeInTime;
 	int fadeOutTime;
 	int idleTime; // Time to wait in black
 	
+	int numFiles;
+	
 	ofxQTKitVideoPlayer movie[10];
+	
+	ofxOscReceiver receiver;
 	
 	int vPos[10][4]; //[ID][x, y, w, h]
 	
@@ -51,20 +53,7 @@ public:
 	int currentIdleMovie;
 	bool dirUpdated;
 	
-	
-	//Recorder stuff
-	
-	ofVideoGrabber		grabber;
-	ofQtVideoSaver		saver;
-		
-	int camWidth;
-	int camHeight;
-	int fileNumber;
 	string fileName;
-	bool recording;
-	int recordingCounter;
-	
-	
 	
 	ofDirectory directory;
 	string fileNames[9];

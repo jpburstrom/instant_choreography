@@ -5,108 +5,102 @@
 void instantChoreography::setup(){
 	ofBackground(0,0,0);
 	
-	loopMoviesAt = 66;//3513;
+	loopMoviesAt = 3513;
 	fadeInTime = 5;
 	fadeOutTime = 30;
 	idleTime = 10;
 	
-	fadePos[1] = 255;
-	fadeMode[1] = 1; // start with a fade in, yes?
+	bFullscreen = false;
 	
-	fileNumber = 1;
-	camWidth = 640;
-	camHeight = 480;
-	
-	grabber.setDeviceID(0);
-	grabber.initGrabber(camWidth,camHeight);
-	
-	string fileName = "test.mov";
-	
-	saver.setCodecQualityLevel(OF_QT_SAVER_CODEC_QUALITY_HIGH);  
-    saver.setup(camWidth,camHeight,fileName);  
-
-	for (int i=0; i < 10; i++) {
-		movie[i].loadMovie("movies/fingers.mov");
-
-	}
-	
-	for (int i=0; i < 10; i++) {
-		movie[i].play();
-	}
+	fadePos = 255;
+	fadeMode = 1; // start with a fade in, yes?
 	
 	currentIdleMovie = 9;
 	
 	for (int i=0; i < 9; i++) {
-		vPos[i][0] = ((i % 3) * 200) + 800;
-		vPos[i][1] = (i/3) * 150;
-		vPos[i][2]= 160;
-		vPos[i][3] = 120;
+		vPos[i][0] = ((i % 3) * 260) + 20;
+		vPos[i][1] = ((i/3) * 195) + 15;
+		vPos[i][2]= 240;
+		vPos[i][3] = 180;
 	}
 
 	ofSetFrameRate(25);
-	//updateDir();
+	
+	updateDirOnLoad();
+	receiver.setup(PORT);
+	
 }
 
-void instantChoreography::updateDir()
+void instantChoreography::updateDirOnLoad()
 {
 	cout << "------updateDir()----\n";
 
 	directory.allowExt("mov");
-	int numFiles = directory.listDir("ic/");
+	numFiles = directory.listDir("");
+	cout << numFiles << "<-Numfiles\n";
 	directory.sort();
 	//G
-	for (int i = numFiles; (i > (numFiles - 9)) && i >= 0; i--) {
-		//cout << "\n LS: " << directory.getName(i - 1);
-		fileNames[numFiles - i] = "ic/" + directory.getName(i - 1);
-		//cout << numFiles - i << fileNames[numFiles - i] << "\n";
+	for (int i = numFiles; (i > (numFiles - 9)) && i > 0; i--) {		
+		movie[numFiles - i].loadMovie(directory.getName(i-1), OFXQTVIDEOPLAYER_MODE_TEXTURE_ONLY);
+		//movie[numFiles - i].setLoopState(false);
 	}
 	
-	dirUpdated = true;
+	for (int i = 0; i < currentIdleMovie; i++) {
+
+		//movie[i].play();
+	}
+	
+	//currentIdleMovie = min(9, numFiles);
+	
+	//dirUpdated = true;
 }
 	
 	
 //--------------------------------------------------------------
 void instantChoreography::update(){
 
-	loop = ofGetFrameNum() % (loopMoviesAt + idleTime + fadeInTime + fadeOutTime);
+	loop = ofGetFrameNum() % (idleTime + loopMoviesAt);
 	
-	grabber.grabFrame();
 	
-	if (recording){
-		doRecording();
-	}				
 	
-	//cout << "FRAME " << ofGetFrameNum();
-	
-	//temp shit
-	if (ofGetFrameNum() == 1) {
-		updateDir();
+	while (receiver.hasWaitingMessages()) 
+	{
+		ofxOscMessage m;
+		receiver.getNextMessage(&m);
+		if (m.getAddress() == "/filename") {
+			fileName = m.getArgAsString(0);
+			cout << "Received: " << fileName << "\n";
+			dirUpdated = true;
+		}
 	}
 	
-	int offset = ofGetFrameNum() % loopMoviesAt;
+	//cout << "FRAME " << ofGetFrameNum();
+
 	
 	if (loop == 0) {
-		fadeMode[1] = 1;
+		fadeMode = 1;
 		if (dirUpdated) {
-				movie[currentIdleMovie].loadMovie(fileNames[0], OFXQTVIDEOPLAYER_MODE_TEXTURE_ONLY);
-				movie[currentIdleMovie].play();
-				currentIdleMovie = (currentIdleMovie - 1) % 10;
-				//cout << currentIdleMovie;
-				movie[currentIdleMovie].stop();
-				movie[currentIdleMovie].closeMovie();
-				dirUpdated = false;
-		}
-		for (int i=0; i < 9; i++) {
-			movie[i].setPosition(0.0);
+			// cout << "updated: " << i << "\n";
+			movie[currentIdleMovie].loadMovie(fileName, OFXQTVIDEOPLAYER_MODE_TEXTURE_ONLY);
+			//movie[currentIdleMovie].setLoopState(false);
+			//movie[currentIdleMovie].play();
+		
+			currentIdleMovie = (currentIdleMovie - 1) % 10;
+			movie[currentIdleMovie].stop();
+			movie[currentIdleMovie].closeMovie();
+			
+			numFiles++;
+			dirUpdated = false;
 		}
 		
 	} else if (loop == fadeInTime) {
-		fadeMode[1] = 0;
-	} else if (loop == (loopMoviesAt + fadeInTime)) {
-		fadeMode[1] = 2;
+		fadeMode = 0;
+	} else if (loop == (loopMoviesAt - fadeOutTime)) {
+		fadeMode = 2;
 	}
 
 	for (int i=0; i < 10; i++) {
+		movie[i].setFrame(loop);
 		movie[i].update();
 	}
 }
@@ -119,17 +113,18 @@ void instantChoreography::draw(){
 	int x, y;
 	for (int i=0; i < 9; i++) {
 		int z = (i + currentIdleMovie + 1) % 10;
-		//cout << z;//currentIdleMovie;		
-		movie[z].draw(vPos[i][0],vPos[i][1],vPos[i][2],vPos[i][3]);	
+		//cout << z;//currentIdleMovie;	
+		if (movie[z].isLoaded()) {
+			movie[z].draw(vPos[i][0],vPos[i][1],vPos[i][2],vPos[i][3]);	
+		}
 	}	
 	//cout << "\n";
 
-	fade(1);
+	fade();
 
 
-	ofSetColor(255);  
 	
-	debugDraw();
+	//debugDraw();
 
 	
 }
@@ -139,107 +134,58 @@ void instantChoreography::debugDraw()
 	for (int i = 0; i < 9; i++) {
 		ofDrawBitmapString(ofToString(i), vPos[i][0], vPos[i][1] + 10);
 	}
-	if (saver.bAmSetupForRecording()){  
-		ofSetColor(255);  
-		ofDrawBitmapString("setup for recording, (press 's' to save)",100,300);  
-		
-		if (recording){  
-			ofSetHexColor(0x00ff00);  
-			ofDrawBitmapString("recording, (press 'r' to toggle)",100,320);  
-		} else {  
-			ofSetHexColor(0xff0000);  
-			ofDrawBitmapString("not recording, (press 'r' to toggle)",100,320);  
-		}  
-	} else {  
-		ofSetColor(128);  
-		ofDrawBitmapString("not setup to record",100,320);  
-	}
 	ofSetColor(255);
 	ofDrawBitmapString(ofToString(loop),700, 10);
 }
 
-
-void instantChoreography::startRecording()
+void instantChoreography::fade()
 {
-	saver.setup(camWidth,camHeight, fileName);
-	recording = true;
-	recordingCounter = 0;
-}
-/**
- * Called every frame if recording
- */
-void instantChoreography::doRecording()
-{
-	recordingCounter++;
-	if (recordingCounter % loopMoviesAt == 0) {
-		stopRecording();
-	} else {
-		saver.addFrame(grabber.getPixels(), 1.0f / 25.0f);   
-	}
-	
-}
-
-void instantChoreography::stopRecording()
-{	
-	saver.finishMovie();
-	recording = false;
-	//FIXME: set this in startRecording, maybe?
-	fileNumber = ++fileNumber;
-	fileName = "output_" + ofToString(fileNumber) + ".mov";
-	updateDir();
-}
-
-void instantChoreography::fade(int screen)
-{
-	//cout << "FadeMode: " << fadeMode[screen] << "\n";
-	if (fadeMode[screen] == 0) {
+	//cout << "FadeMode: " << fadeMode << "\n";
+	if (fadeMode == 0) {
 		return;
-	} else if (fadeMode[screen] == 1) {
+	} else if (fadeMode == 1) {
 		//fade In
-		fadePos[screen] = max(0, fadePos[screen] - (255 / fadeInTime));
-		if (fadePos[screen] == 0)
-			fadeMode[screen] = 0;
+		fadePos = max(0, fadePos - (255 / fadeInTime));
+		if (fadePos == 0)
+			fadeMode = 0;
 			
-	} else if (fadeMode[screen] == 2) {
+	} else if (fadeMode == 2) {
 		//fadeout
-		fadePos[screen] = min(255, fadePos[screen] + (255 / fadeOutTime));
-		if (fadePos[screen] == 255)
-			fadeMode[screen] = 3;
+		fadePos = min(255, fadePos + (255 / fadeOutTime));
+		if (fadePos == 255)
+			fadeMode = 3;
 	} else { 
 		// black
-		fadePos[screen] = 255;
+		fadePos = 255;
 	}
 
 
 	ofEnableAlphaBlending();
-	ofSetColor(0,0,0,fadePos[screen]);
+	ofSetColor(0,0,0,fadePos);
 	//ofSetColor(255,0,0,127);
 	
-	switch (screen) {
-		case 0:
-			ofRect(0, 0, 800, 600);
-			break;
-		case 1:
-			ofRect(800,0,800, 600);
-			break;
-	}
+	ofRect(0, 0, 800, 600);
 
 }
 
 //--------------------------------------------------------------
 void instantChoreography::keyPressed  (int key){
 	
-	//TODO: Check for other keys
-	
-	if (!recording) {
-		startRecording();
-//		printf("Now recording\n");
-	} else {
-		stopRecording();
 
-//		printf("Stopped recording\n");
+	if (268 == key) { //F12
+		ofToggleFullscreen();
+		bFullscreen = !bFullscreen;
+		if (bFullscreen) {
+			ofHideCursor ();
+		} else {
+			ofShowCursor ();
+		}
 	}
-
+	
+	//DEBUG::
+	//cout << "Next slot: " << numFiles % (currentIdleMovie + 1);
+	//dirUpdated = true;
+	
 }
 
 //--------------------------------------------------------------
@@ -282,26 +228,3 @@ void instantChoreography::gotMessage(ofMessage msg){
 void instantChoreography::dragEvent(ofDragInfo dragInfo){ 
 
 }
-
-/*
-
-void movieLoader::load(ofxQTKitVideoPlayer m, string f) {
-	cout << "Loading new file " << f << "\n";
-	movie.stop();
-	movie.closeMovie();
-	
-	movie = m;
-	filename = f;
-	lock();  
-	notice("Start thread");
-	if(!isThreadRunning())  
-		startThread(true, false);  
-	unlock();
-	
-}
-
-void movieLoader::threadedFunction() {
-	movie.loadMovie(filename, OFXQTVIDEOPLAYER_MODE_TEXTURE_ONLY);
-	stopThread(true);
-}
-*/
