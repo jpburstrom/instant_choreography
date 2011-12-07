@@ -12,6 +12,11 @@
 		8F3D2232148EA615009BF151 /* QTKitMovieRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3D222E148EA615009BF151 /* QTKitMovieRenderer.m */; };
 		8F3D2272148EA8A5009BF151 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3D2271148EA8A5009BF151 /* CoreVideo.framework */; };
 		8F3D2274148EA8A5009BF151 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3D2273148EA8A5009BF151 /* QTKit.framework */; };
+		8FDEE621148F5E87000A1FBA /* osc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FDEE615148F5E87000A1FBA /* osc.a */; };
+		8FDEE622148F5E87000A1FBA /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FDEE619148F5E87000A1FBA /* ofxOscBundle.cpp */; };
+		8FDEE623148F5E87000A1FBA /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FDEE61B148F5E87000A1FBA /* ofxOscMessage.cpp */; };
+		8FDEE624148F5E87000A1FBA /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FDEE61D148F5E87000A1FBA /* ofxOscReceiver.cpp */; };
+		8FDEE625148F5E87000A1FBA /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FDEE61F148F5E87000A1FBA /* ofxOscSender.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -73,6 +78,31 @@
 		8F3D222E148EA615009BF151 /* QTKitMovieRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTKitMovieRenderer.m; sourceTree = "<group>"; };
 		8F3D2271148EA8A5009BF151 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		8F3D2273148EA8A5009BF151 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
+		8FDEE600148F5E87000A1FBA /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
+		8FDEE605148F5E87000A1FBA /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
+		8FDEE606148F5E87000A1FBA /* NetworkingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
+		8FDEE607148F5E87000A1FBA /* PacketListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketListener.h; sourceTree = "<group>"; };
+		8FDEE608148F5E87000A1FBA /* TimerListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerListener.h; sourceTree = "<group>"; };
+		8FDEE609148F5E87000A1FBA /* UdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpSocket.h; sourceTree = "<group>"; };
+		8FDEE60B148F5E87000A1FBA /* MessageMappingOscPacketListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageMappingOscPacketListener.h; sourceTree = "<group>"; };
+		8FDEE60C148F5E87000A1FBA /* OscException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscException.h; sourceTree = "<group>"; };
+		8FDEE60D148F5E87000A1FBA /* OscHostEndianness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscHostEndianness.h; sourceTree = "<group>"; };
+		8FDEE60E148F5E87000A1FBA /* OscOutboundPacketStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscOutboundPacketStream.h; sourceTree = "<group>"; };
+		8FDEE60F148F5E87000A1FBA /* OscPacketListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscPacketListener.h; sourceTree = "<group>"; };
+		8FDEE610148F5E87000A1FBA /* OscPrintReceivedElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscPrintReceivedElements.h; sourceTree = "<group>"; };
+		8FDEE611148F5E87000A1FBA /* OscReceivedElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscReceivedElements.h; sourceTree = "<group>"; };
+		8FDEE612148F5E87000A1FBA /* OscTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscTypes.h; sourceTree = "<group>"; };
+		8FDEE615148F5E87000A1FBA /* osc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = osc.a; sourceTree = "<group>"; };
+		8FDEE617148F5E87000A1FBA /* ofxOsc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOsc.h; sourceTree = "<group>"; };
+		8FDEE618148F5E87000A1FBA /* ofxOscArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscArg.h; sourceTree = "<group>"; };
+		8FDEE619148F5E87000A1FBA /* ofxOscBundle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscBundle.cpp; sourceTree = "<group>"; };
+		8FDEE61A148F5E87000A1FBA /* ofxOscBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscBundle.h; sourceTree = "<group>"; };
+		8FDEE61B148F5E87000A1FBA /* ofxOscMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscMessage.cpp; sourceTree = "<group>"; };
+		8FDEE61C148F5E87000A1FBA /* ofxOscMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscMessage.h; sourceTree = "<group>"; };
+		8FDEE61D148F5E87000A1FBA /* ofxOscReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscReceiver.cpp; sourceTree = "<group>"; };
+		8FDEE61E148F5E87000A1FBA /* ofxOscReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscReceiver.h; sourceTree = "<group>"; };
+		8FDEE61F148F5E87000A1FBA /* ofxOscSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscSender.cpp; sourceTree = "<group>"; };
+		8FDEE620148F5E87000A1FBA /* ofxOscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscSender.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -84,7 +114,7 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* InstantChoreography.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstantChoreography.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B69B5B0A3A1756003C02F2 /* Instant Choreography Recorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instant Choreography Recorder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = testApp.cpp; path = src/testApp.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1F0A3A1BDC003C02F2 /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = testApp.h; path = src/testApp.h; sourceTree = SOURCE_ROOT; };
@@ -117,6 +147,7 @@
 				E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */,
 				8F3D2272148EA8A5009BF151 /* CoreVideo.framework in Frameworks */,
 				8F3D2274148EA8A5009BF151 /* QTKit.framework in Frameworks */,
+				8FDEE621148F5E87000A1FBA /* osc.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,9 +201,107 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		8FDEE5FF148F5E87000A1FBA /* ofxOsc */ = {
+			isa = PBXGroup;
+			children = (
+				8FDEE600148F5E87000A1FBA /* install.xml */,
+				8FDEE601148F5E87000A1FBA /* libs */,
+				8FDEE616148F5E87000A1FBA /* src */,
+			);
+			name = ofxOsc;
+			path = ../../../addons/ofxOsc;
+			sourceTree = SOURCE_ROOT;
+		};
+		8FDEE601148F5E87000A1FBA /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				8FDEE602148F5E87000A1FBA /* oscpack */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		8FDEE602148F5E87000A1FBA /* oscpack */ = {
+			isa = PBXGroup;
+			children = (
+				8FDEE603148F5E87000A1FBA /* include */,
+				8FDEE613148F5E87000A1FBA /* lib */,
+			);
+			path = oscpack;
+			sourceTree = "<group>";
+		};
+		8FDEE603148F5E87000A1FBA /* include */ = {
+			isa = PBXGroup;
+			children = (
+				8FDEE604148F5E87000A1FBA /* ip */,
+				8FDEE60A148F5E87000A1FBA /* osc */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		8FDEE604148F5E87000A1FBA /* ip */ = {
+			isa = PBXGroup;
+			children = (
+				8FDEE605148F5E87000A1FBA /* IpEndpointName.h */,
+				8FDEE606148F5E87000A1FBA /* NetworkingUtils.h */,
+				8FDEE607148F5E87000A1FBA /* PacketListener.h */,
+				8FDEE608148F5E87000A1FBA /* TimerListener.h */,
+				8FDEE609148F5E87000A1FBA /* UdpSocket.h */,
+			);
+			path = ip;
+			sourceTree = "<group>";
+		};
+		8FDEE60A148F5E87000A1FBA /* osc */ = {
+			isa = PBXGroup;
+			children = (
+				8FDEE60B148F5E87000A1FBA /* MessageMappingOscPacketListener.h */,
+				8FDEE60C148F5E87000A1FBA /* OscException.h */,
+				8FDEE60D148F5E87000A1FBA /* OscHostEndianness.h */,
+				8FDEE60E148F5E87000A1FBA /* OscOutboundPacketStream.h */,
+				8FDEE60F148F5E87000A1FBA /* OscPacketListener.h */,
+				8FDEE610148F5E87000A1FBA /* OscPrintReceivedElements.h */,
+				8FDEE611148F5E87000A1FBA /* OscReceivedElements.h */,
+				8FDEE612148F5E87000A1FBA /* OscTypes.h */,
+			);
+			path = osc;
+			sourceTree = "<group>";
+		};
+		8FDEE613148F5E87000A1FBA /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				8FDEE614148F5E87000A1FBA /* osx */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		8FDEE614148F5E87000A1FBA /* osx */ = {
+			isa = PBXGroup;
+			children = (
+				8FDEE615148F5E87000A1FBA /* osc.a */,
+			);
+			path = osx;
+			sourceTree = "<group>";
+		};
+		8FDEE616148F5E87000A1FBA /* src */ = {
+			isa = PBXGroup;
+			children = (
+				8FDEE617148F5E87000A1FBA /* ofxOsc.h */,
+				8FDEE618148F5E87000A1FBA /* ofxOscArg.h */,
+				8FDEE619148F5E87000A1FBA /* ofxOscBundle.cpp */,
+				8FDEE61A148F5E87000A1FBA /* ofxOscBundle.h */,
+				8FDEE61B148F5E87000A1FBA /* ofxOscMessage.cpp */,
+				8FDEE61C148F5E87000A1FBA /* ofxOscMessage.h */,
+				8FDEE61D148F5E87000A1FBA /* ofxOscReceiver.cpp */,
+				8FDEE61E148F5E87000A1FBA /* ofxOscReceiver.h */,
+				8FDEE61F148F5E87000A1FBA /* ofxOscSender.cpp */,
+				8FDEE620148F5E87000A1FBA /* ofxOscSender.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				8FDEE5FF148F5E87000A1FBA /* ofxOsc */,
 				8F3D21F2148EA615009BF151 /* ofxQTKitVideoPlayer */,
 				8F3D2113148E8CD9009BF151 /* ofxDirList */,
 			);
@@ -234,7 +363,7 @@
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
-				E4B69B5B0A3A1756003C02F2 /* InstantChoreography.app */,
+				E4B69B5B0A3A1756003C02F2 /* Instant Choreography Recorder.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -262,9 +391,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E4B69B5A0A3A1756003C02F2 /* InstantChoreography */ = {
+		E4B69B5A0A3A1756003C02F2 /* Instant Choreography Recorder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "InstantChoreography" */;
+			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "Instant Choreography Recorder" */;
 			buildPhases = (
 				E4B69B580A3A1756003C02F2 /* Sources */,
 				E4B69B590A3A1756003C02F2 /* Frameworks */,
@@ -276,9 +405,9 @@
 			dependencies = (
 				E4EEB9AC138B136A00A80321 /* PBXTargetDependency */,
 			);
-			name = InstantChoreography;
+			name = "Instant Choreography Recorder";
 			productName = myOFApp;
-			productReference = E4B69B5B0A3A1756003C02F2 /* InstantChoreography.app */;
+			productReference = E4B69B5B0A3A1756003C02F2 /* Instant Choreography Recorder.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -286,7 +415,7 @@
 /* Begin PBXProject section */
 		E4B69B4C0A3A1720003C02F2 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "instant_choreography" */;
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "ic_recorder" */;
 			compatibilityVersion = "Xcode 2.4";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -307,7 +436,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				E4B69B5A0A3A1756003C02F2 /* InstantChoreography */,
+				E4B69B5A0A3A1756003C02F2 /* Instant Choreography Recorder */,
 			);
 		};
 /* End PBXProject section */
@@ -348,6 +477,10 @@
 				8F3D1FB8148E6E7A009BF151 /* ofQtVideoSaver.cpp in Sources */,
 				8F3D2231148EA615009BF151 /* ofxQTKitVideoPlayer.mm in Sources */,
 				8F3D2232148EA615009BF151 /* QTKitMovieRenderer.m in Sources */,
+				8FDEE622148F5E87000A1FBA /* ofxOscBundle.cpp in Sources */,
+				8FDEE623148F5E87000A1FBA /* ofxOscMessage.cpp in Sources */,
+				8FDEE624148F5E87000A1FBA /* ofxOscReceiver.cpp in Sources */,
+				8FDEE625148F5E87000A1FBA /* ofxOscSender.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +554,7 @@
 		E4B69B600A3A1757003C02F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -498,7 +632,9 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 				);
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../addons/ofxOsc/libs/oscpack/lib/osx\"";
 				PREBINDING = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				WRAPPER_EXTENSION = app;
@@ -508,6 +644,7 @@
 		E4B69B610A3A1757003C02F2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -584,7 +721,9 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_49)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 				);
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../addons/ofxOsc/libs/oscpack/lib/osx\"";
 				PREBINDING = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -594,7 +733,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "instant_choreography" */ = {
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "ic_recorder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B4E0A3A1720003C02F2 /* Debug */,
@@ -603,7 +742,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "InstantChoreography" */ = {
+		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "Instant Choreography Recorder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B600A3A1757003C02F2 /* Debug */,
